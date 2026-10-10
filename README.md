@@ -30,7 +30,5 @@ Using scripts breaks the Roblox Terms of Use and can get your account banned. Us
 
 ## Feedback
 
-## Feedback
-
 Found a bug? Open an **Issue** in this repository.
 Discord: `maks_seks_bobma` (replies may take a while)
