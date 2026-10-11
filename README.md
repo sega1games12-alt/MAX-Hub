@@ -1,4 +1,9 @@
-# ⚡ MAX Hub
+--[[
+    ⚡ MAX Hub v1.8.1 - GOLD EDITION
+    Author: sega1games12-alt
+    https://github.com/sega1games12-alt/MAX-Hub
+    Please don't re-upload or sell this script without credit.
+]]
 
 Script hub for **Murder Mystery 2** with an auto farm, a values/trade calculator and a low power mode for multi-window setups.
 
@@ -32,3 +37,7 @@ Using scripts breaks the Roblox Terms of Use and can get your account banned. Us
 
 Found a bug? Open an **Issue** in this repository.
 Discord: `maks_seks_bobma` (replies may take a while)
+
+## Credits
+
+Made by **sega1games12-alt**. Please don't re-upload this script without credit.
