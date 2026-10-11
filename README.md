@@ -20,7 +20,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/sega1games12-alt/MAX-
 
 ## Notes
 
-- Values and Trade may be temporarily unavailable while the price server is being updated.
+- Values and Trade need the price server. If they show "Offline", try again later.
 - The hub shows an anonymous online counter. It only sends a random session id, no username and no user id.
 - Different executors support different functions, so something may not work everywhere.
 
