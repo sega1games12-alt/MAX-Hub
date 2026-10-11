@@ -23,8 +23,7 @@ getgenv().AutoEndRound = false getgenv().AutoReset = false
 getgenv().PlayerESPEnabled = false getgenv().RoleESPEnabled = false getgenv().GunESPEnabled = false getgenv().AutoGrabGun = false getgenv().AutoFarmEnabled = false getgenv().AutoShotEnabled = false getgenv().KillAuraEnabled = false getgenv().FlyEnabled = false getgenv().NoClipEnabled = false getgenv().AntiFlingEnabled = false getgenv().FullbrightEnabled = false getgenv().RainbowUIEnabled = false getgenv().GlassModeEnabled = false getgenv().AngelAuraEnabled = false getgenv().InfiniteJumpsEnabled = false
 
 local Players = game:GetService("Players") local TweenService = game:GetService("TweenService") local UserInputService = game:GetService("UserInputService") local RunService = game:GetService("RunService") local HttpService = game:GetService("HttpService") local Lighting = game:GetService("Lighting") local LocalPlayer = Players.LocalPlayer local Camera = workspace.CurrentCamera
-local onlineItems = {} local isLoaded = false local grabDebounce = false
-local apiBase = "https://685dd885-32bd-4a4c-a712-8898791ea1cb-00-melrwd2vbenf.sisko.replit.dev/api"
+local onlineItems = {} local isLoaded = false local grabDebounce = false local apiBase = "https://asset-manager--sega1games1213.replit.app/api"
 local defaultWalkSpeed = 16 local defaultJumpPower = 50 getgenv().CurrentCustomSpeed = defaultWalkSpeed getgenv().CurrentCustomJump = defaultJumpPower getgenv().SpeedAndJumpLoop = true
 local origAmbient = Lighting.Ambient local origOutdoorAmbient = Lighting.OutdoorAmbient local origBrightness = Lighting.Brightness local origFogEnd = Lighting.FogEnd
 
