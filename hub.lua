@@ -1,9 +1,4 @@
---[[
-    ⚡ MAX Hub v1.8.1 - GOLD EDITION
-    Author: sega1games12-alt
-    https://github.com/sega1games12-alt/MAX-Hub
-    Please don't re-upload or sell this script without credit.
-]]
+
 if getgenv().MAXHubCleanup then pcall(getgenv().MAXHubCleanup) end
 do
     local cg = game:GetService("CoreGui")
@@ -23,7 +18,8 @@ getgenv().AutoEndRound = false getgenv().AutoReset = false
 getgenv().PlayerESPEnabled = false getgenv().RoleESPEnabled = false getgenv().GunESPEnabled = false getgenv().AutoGrabGun = false getgenv().AutoFarmEnabled = false getgenv().AutoShotEnabled = false getgenv().KillAuraEnabled = false getgenv().FlyEnabled = false getgenv().NoClipEnabled = false getgenv().AntiFlingEnabled = false getgenv().FullbrightEnabled = false getgenv().RainbowUIEnabled = false getgenv().GlassModeEnabled = false getgenv().AngelAuraEnabled = false getgenv().InfiniteJumpsEnabled = false
 
 local Players = game:GetService("Players") local TweenService = game:GetService("TweenService") local UserInputService = game:GetService("UserInputService") local RunService = game:GetService("RunService") local HttpService = game:GetService("HttpService") local Lighting = game:GetService("Lighting") local LocalPlayer = Players.LocalPlayer local Camera = workspace.CurrentCamera
-local onlineItems = {} local isLoaded = false local grabDebounce = false local apiBase = "https://asset-manager--sega1games1213.replit.app/api"
+local onlineItems = {} local isLoaded = false local grabDebounce = false
+local apiBase = "https://685dd885-32bd-4a4c-a712-8898791ea1cb-00-melrwd2vbenf.sisko.replit.dev/api"
 local defaultWalkSpeed = 16 local defaultJumpPower = 50 getgenv().CurrentCustomSpeed = defaultWalkSpeed getgenv().CurrentCustomJump = defaultJumpPower getgenv().SpeedAndJumpLoop = true
 local origAmbient = Lighting.Ambient local origOutdoorAmbient = Lighting.OutdoorAmbient local origBrightness = Lighting.Brightness local origFogEnd = Lighting.FogEnd
 
@@ -42,10 +38,10 @@ getgenv().MAXHubCleanup = function()
             if st[k] then pcall(function() st[k]:Disconnect() end) st[k] = nil end
         end
         st.farmPaused = false
-        st.erRun = (st.erRun or 0) + 1
+        st.erRun = (st.erRun or 0) + 1 
     end
 
-    for _, fn in ipairs(RUN.cleanups) do pcall(fn) end
+    for _, fn in ipairs(RUN.cleanups) do pcall(fn) end 
 
     for _, p in ipairs(Players:GetPlayers()) do
         local ch = p.Character
@@ -147,7 +143,7 @@ function NT:AddToggle(TC) local TF=Instance.new("Frame") TF.Parent=P TF.Backgrou
 function NT:AddLabel(LC) local L=Instance.new("TextLabel") L.Parent=P L.BackgroundTransparency=1 L.Size=UDim2.new(1,-4,0,20) L.Font=Enum.Font.Gotham L.Text=LC.Text or "" L.TextColor3=TextDim L.TextSize=11 L.ZIndex=4 return L end
 function NT:AddTextbox(BC) local BF=Instance.new("Frame") BF.Parent=P BF.BackgroundColor3=Elem BF.BorderSizePixel=0 BF.Size=UDim2.new(1,-4,0,44) BF.ZIndex=4 Corner(BF,6) local BL=Instance.new("TextLabel") BL.Parent=BF BL.BackgroundTransparency=1 BL.Size=UDim2.new(1,0,0,16) BL.Position=UDim2.new(0,8,0,3) BL.Font=Enum.Font.Gotham BL.Text=BC.Name or "Textbox" BL.TextColor3=TextDim BL.TextSize=11 BL.TextXAlignment=Enum.TextXAlignment.Left BL.ZIndex=4 local BX=Instance.new("TextBox") BX.Parent=BF BX.BackgroundColor3=Color3.fromRGB(30,30,35) BX.BorderSizePixel=0 BX.Size=UDim2.new(1,-16,0,18) BX.Position=UDim2.new(0,8,0,21) BX.Font=Enum.Font.Gotham BX.PlaceholderText=BC.Placeholder or "" BX.Text="" BX.TextColor3=Text BX.TextSize=12 BX.TextXAlignment=Enum.TextXAlignment.Left BX.ZIndex=4 Corner(BX,4) BX.FocusLost:Connect(function(ep) if BC.Callback then BC.Callback(BX.Text,ep) end end) return BX end return NT end return W end function Orion:Init() end return Orion end)()
 
-local Window=OrionLib:MakeWindow({Name="⚡ MAX Hub v1.8.1 🎂"}) OrionLib:Init() local MainTab=Window:MakeTab({Name="Main"}) local VisualsTab=Window:MakeTab({Name="Visuals"}) local ValuesTab=Window:MakeTab({Name="Values"}) local TradeTab=Window:MakeTab({Name="Trade"}) local SettingsTab=Window:MakeTab({Name="Settings"})
+local Window=OrionLib:MakeWindow({Name="⚡ MAX Hub v1.8.1 🎂"}) OrionLib:Init() local MainTab=Window:MakeTab({Name="Main"}) local VisualsTab=Window:MakeTab({Name="Visuals"}) local ValuesTab=Window:MakeTab({Name="Values"}) local TradeTab=Window:MakeTab({Name="Trade"}) local SettingsTab=Window:MakeTab({Name="Settings"}) local SupportTab=Window:MakeTab({Name="Support"})
 
 -- ==============================================
 -- LIQUID GLASS MODE 2.1
@@ -400,12 +396,8 @@ RUN.track(workspace.DescendantRemoving:Connect(function(descendant) if descendan
 for _, obj in ipairs(workspace:GetDescendants()) do if obj.Name == "GunDrop" then setupGunRainbow(obj) end end
 task.spawn(function() while RUN.alive() and task.wait(0.1) do if getgenv().GunESPEnabled then local hue = (tick() * 0.15) % 1 local rainbowColor = Color3.fromHSV(hue, 1, 1) for gun, highlight in pairs(activeGunHighlights) do if highlight and highlight.Parent then highlight.Enabled = true highlight.FillColor = rainbowColor else activeGunHighlights[gun] = nil end end else for gun, highlight in pairs(activeGunHighlights) do if highlight and highlight.Parent then highlight.Enabled = false end end end end end)
 
--- ===== AUTO FARM v9 (v7 + хуки для Auto End Round / Auto Reset, скорость до 1000) =====
--- Заменяет прошлый блок целиком: от `getgenv().FarmSpeed = 30`
--- до конца текстбокса "Farm Height". RunService уже объявлен выше в хабе.
-
-getgenv().FarmSpeed = 30 
-getgenv().FarmHeight = 0 
+getgenv().FarmSpeed = 30  
+getgenv().FarmHeight = 0    
 
 local farmConn = nil
 local noclipConn = nil
@@ -415,12 +407,12 @@ local lastScan = 0
 local holdUntil = 0
 local pickTime = 0
 local pickLimit = 0
-getgenv().FarmDebug = false  -- пишет в F9 статус раз в секунду
+getgenv().FarmDebug = false 
 
 local lastDbg = 0
-local virtPos = nil 
+local virtPos = nil
 local coinStart = nil
-local tried = setmetatable({}, { __mode = "k" }) 
+local tried = setmetatable({}, { __mode = "k" })  
 local banned = setmetatable({}, { __mode = "k" }) 
 
 local function findContainer()
@@ -490,7 +482,7 @@ local function startAutoFarm()
     holdUntil = 0
     virtPos = nil
 
-  
+   
     noclipConn = RunService.Stepped:Connect(function()
         if not getgenv().AutoFarmEnabled then return end
         local char = LocalPlayer.Character
@@ -505,10 +497,9 @@ local function startAutoFarm()
     farmConn = RunService.Heartbeat:Connect(function(dt)
         if not getgenv().AutoFarmEnabled then return end
 
-        -- пауза: Auto End Round / Auto Reset сами управляют персонажем
         local st = getgenv().MAXState
         if st and st.farmPaused then
-            
+     
             if not st.flinging then
                 local pc = LocalPlayer.Character
                 local ph = pc and pc:FindFirstChild("HumanoidRootPart")
@@ -525,11 +516,11 @@ local function startAutoFarm()
             return
         end
 
-      
+       
         hrp.AssemblyLinearVelocity = Vector3.zero
         hrp.AssemblyAngularVelocity = Vector3.zero
 
-        
+      
         if getgenv().FarmDebug and tick() - lastDbg > 1 then
             lastDbg = tick()
             local total, free = 0, 0
@@ -560,10 +551,10 @@ local function startAutoFarm()
             coinStart = farmCoin.Position
             local speed = math.max(tonumber(getgenv().FarmSpeed) or 30, 1)
             pickTime = tick()
-            pickLimit = (d or 0) / speed + 2 
+            pickLimit = (d or 0) / speed + 2
         end
 
-        
+    
         if holdUntil == 0 and tick() - pickTime > pickLimit then
             if getgenv().FarmDebug then
                 print(string.format("[Farm] skip (не долетел за %.1fс, осталось %.1f): %s",
@@ -578,7 +569,7 @@ local function startAutoFarm()
         local speed = math.max(tonumber(getgenv().FarmSpeed) or 30, 1)
         local rot = hrp.CFrame - hrp.CFrame.Position
 
-       
+      
         if not virtPos or (virtPos - hrp.Position).Magnitude > 15 then
             virtPos = hrp.Position
         end
@@ -588,14 +579,14 @@ local function startAutoFarm()
         local step = speed * dt
 
         if dist <= step then
-            
+         
             virtPos = target
             hrp.CFrame = CFrame.new(target) * rot
 
             if holdUntil == 0 then
                 holdUntil = tick() + 0.06
                 local coin = farmCoin
-                
+              
                 if st and st.onArrive then st.onArrive(coin) end
                 task.spawn(function()
                     pcall(function()
@@ -675,10 +666,8 @@ do
     })
 end
 
-
 getgenv().MAXState = getgenv().MAXState or {}
 getgenv().FlySpeedMultiplier = getgenv().FlySpeedMultiplier or 1 
-
 
 function toggleNoClip()
     local S = getgenv().MAXState
@@ -744,7 +733,7 @@ function enableFly()
         if UIS:IsKeyDown(Enum.KeyCode.LeftShift) or UIS:IsKeyDown(Enum.KeyCode.LeftControl) then
             dir = dir - Vector3.new(0, 1, 0)
         end
-        -- телефон / геймпад: стик даёт MoveDirection
+    
         if dir.Magnitude == 0 and hum.MoveDirection.Magnitude > 0 then
             dir = hum.MoveDirection
         end
@@ -753,22 +742,22 @@ function enableFly()
         hrp.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
         hrp.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
 
-        -- скорость полёта = скорость бега (текстбокс Speed) * множитель
+     
         local speed = hum.WalkSpeed * (tonumber(getgenv().FlySpeedMultiplier) or 1)
         local targetVel = Vector3.new(0, 0, 0)
         if dir.Magnitude > 0 then
             targetVel = dir.Unit * speed
         end
-        -- плавный разгон и торможение
+   
         S.flyVel = (S.flyVel or Vector3.new(0, 0, 0)):Lerp(targetVel, math.clamp(dt * 10, 0, 1))
 
-        
+      
         if not S.flyPos or (S.flyPos - hrp.Position).Magnitude > 15 then
             S.flyPos = hrp.Position
         end
         S.flyPos = S.flyPos + S.flyVel * dt
 
-        
+       
         local look = cam.CFrame.LookVector
         local flat = Vector3.new(look.X, 0, look.Z)
         if flat.Magnitude > 0.01 then
@@ -788,8 +777,6 @@ function setTime(mode)
     end
 end
 -- ===== AUTO END ROUND + AUTO RESET (v2: надёжное определение полного мешка) =====
--- Работает только при включённом Auto Farm Coins.
---
 -- Auto End Round: когда фарм закончен (мешок полный или монеты кончились),
 --   Murderer  -> встаёт и убивает всех (по очереди телепортируется к каждому)
 --   Sheriff   -> стреляет в мардера издалека (без телепорта), запасной вариант - телепорт
@@ -797,7 +784,7 @@ end
 -- Auto Reset: когда фарм закончен, просто ресетает персонажа.
 -- Если включены обе: сначала End Round, а если раунд так и не кончился, потом ресет.
 --
--- getgenv().BagSize = размер мешка (по умолчанию 40). Если твой мешок другой, поменяй.
+-- getgenv().BagSize = размер мешка (по умолчанию 40).
 
 getgenv().MAXState = getgenv().MAXState or {}
 local S = getgenv().MAXState
@@ -826,12 +813,12 @@ function S.container()
     local now = tick()
     if now - (S.lastScan or 0) < 1 then return nil end
     S.lastScan = now
-    
+   
     for _, m in ipairs(workspace:GetChildren()) do
         local f = m:FindFirstChild("CoinContainer")
         if f then S.cont = f return f end
     end
-    
+  
     if now - (S.lastDeep or 0) > 5 then
         S.lastDeep = now
         for _, o in ipairs(workspace:GetDescendants()) do
@@ -841,11 +828,11 @@ function S.container()
     return nil
 end
 
-function S.active() -- раунд идёт и режим включён
+function S.active() 
     return S.enabled() and S.container() ~= nil
 end
 
-function S.me() -- char, hum, hrp или nil, если мёртв
+function S.me() 
     local char = LocalPlayer.Character
     local hum = char and char:FindFirstChildOfClass("Humanoid")
     local hrp = char and char:FindFirstChild("HumanoidRootPart")
@@ -930,9 +917,7 @@ function S.nextVictim(skip)
     return best
 end
 
--- ---------- определение "монета собрана" и "мешок полный" ----------
 
--- слепок монеты в момент подлёта; потом сравниваем: что-то изменилось = собрана
 function S.sig(coin)
     return {
         tr = coin.Transparency,
@@ -952,18 +937,18 @@ function S.changed(coin, sig)
         or (coin.Position - sig.pos).Magnitude > 3
 end
 
-function S.onArrive(coin) -- вызывается автофармом при подлёте к монете
+function S.onArrive(coin) 
     S.pending[coin] = { t = tick(), sig = S.sig(coin) }
 end
 
--- мешок по интерфейсу игры: true / false / nil (не нашли интерфейс)
+
 function S.bagFull()
     local pg = LocalPlayer:FindFirstChild("PlayerGui")
     if not pg then return nil end
     local bag = S.bag
     if not (bag and bag.Parent) then
         bag = nil
-        if tick() - (S.bagScan or 0) > 3 then -- не сканируем интерфейс слишком часто
+        if tick() - (S.bagScan or 0) > 3 then
             S.bagScan = tick()
             for _, o in ipairs(pg:GetDescendants()) do
                 if o.Name == "CashBag" then bag = o break end
@@ -984,9 +969,9 @@ function S.bagFull()
     return false
 end
 
--- число монет из интерфейса игры (nil, если не нашли)
+
 function S.bagCount()
-    S.bagFull() -- заодно обновит S.bag
+    S.bagFull() 
     local bag = S.bag
     if not (bag and bag.Parent) then return nil end
     local coins = bag:FindFirstChild("Coins", true)
@@ -996,8 +981,6 @@ function S.bagCount()
     return nil
 end
 
--- точный счётчик прямо от сервера: ремоут CoinCollected, если он есть в игре
--- (формат из памяти: тип, собрано, максимум; если не совпадёт, значение просто игнорируется)
 S.serverCount, S.serverMax = nil, nil
 task.spawn(function()
     local RS = game:GetService("ReplicatedStorage")
@@ -1043,7 +1026,7 @@ function S.killAll()
             knife:Activate()
             task.wait(0.12)
         end
-        if S.alive(victim) then skip[victim] = true end -- не убился за 3 секунды: пропускаем
+        if S.alive(victim) then skip[victim] = true end 
     end
 end
 
@@ -1063,7 +1046,7 @@ function S.shootMurdererClose()
         local _, _, hrp = S.me()
         if not hrp then return end
 
-        -- ищем точку рядом с мардером, откуда его видно
+       
         local mp = mhrp.Position
         local look = mhrp.CFrame.LookVector
         local right = mhrp.CFrame.RightVector
@@ -1090,10 +1073,9 @@ function S.shootMurdererClose()
     end
 
     local _, _, hrp = S.me()
-    if hrp then hrp.CFrame = origCF end -- вернуться на место
+    if hrp then hrp.CFrame = origCF end 
 end
--- Sheriff: выстрел через всю карту, без телепорта
--- ищет remote выстрела у пистолета (в MM2 это KnifeLocal.CreateBeam.RemoteFunction)
+-- Sheriff: выстрел через всю карту
 function S.gunRemote(gun)
     local r = gun and gun:FindFirstChild("Shoot")
     if r and r:IsA("RemoteEvent") then return r end
@@ -1130,7 +1112,7 @@ function S.fireAt(gun, pos, forceV)
     return true
 end
 
--- Sheriff: стреляем по кругу разными вариантами, пока мардер не умрёт 
+-- Sheriff: стреляем по кругу разными вариантами, пока мардер не умрёт
 function S.shootMurderer()
     local gun = S.equip("Gun")
     if not gun then dbg("пистолет не найден") return end
@@ -1150,7 +1132,7 @@ function S.shootMurderer()
     end
 end
 
--- Innocent: зафлинговать мардера 
+-- Innocent: зафлинговать мардера (лучшее усилие; мёртвым не работает)
 -- флингует убийцу, пока он жив и раунд идёт; если умер, ждёт респавна в лобби и продолжает
 function S.flingMurderer(targetChar)
     local deadline = tick() + 120
@@ -1161,13 +1143,13 @@ function S.flingMurderer(targetChar)
             mc = c
         end
         local mh = mc and mc:FindFirstChildOfClass("Humanoid")
-        if not mc or not mh or mh.Health <= 0 then break end -- убийца умер или исчез
+        if not mc or not mh or mh.Health <= 0 then break end 
 
         if S.me() then
             S.flingOnce(mc)
             task.wait(0.2)
         else
-            task.wait(0.3) -- мы мертвы, ждём модельку в лобби
+            task.wait(0.3) 
         end
     end
     S.flinging = false
@@ -1188,7 +1170,7 @@ function S.flingOnce(targetChar)
         end
     end
 
-    S.flinging = true -- чтобы автофарм на паузе не гасил скорость во время флинга
+    S.flinging = true 
     local t0 = tick()
         while (S.active() or S.manualFling) and tick() - t0 < 25 do
         local _, _, myHrp = S.me()
@@ -1204,7 +1186,6 @@ function S.flingOnce(targetChar)
 
     S.flinging = false
 
-    -- вернуть персонажа на место и обнулить скорость
     local _, _, myHrp = S.me()
     if myHrp then
         myHrp.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
@@ -1221,7 +1202,6 @@ function S.reset()
     if hum then hum.Health = 0 end
 end
 
--- ---------- запуск после окончания фарма ----------
 
 function S.finish(reason)
     S.phase = "running"
@@ -1244,7 +1224,6 @@ function S.finish(reason)
             if not ok then dbg("ошибка:", err) end
         end
 
-        -- Auto Reset: сам по себе, либо запасной вариант, если раунд не закончился
         if getgenv().AutoReset and S.active() then
             S.reset()
         end
@@ -1285,7 +1264,7 @@ task.spawn(function()
         end
         if not cont then continue end
 
-        -- смотрим, что стало с монетами, к которым мы подлетали
+      
         local now = tick()
         for coin, rec in pairs(S.pending) do
             if S.changed(coin, rec.sig) then
@@ -1293,7 +1272,7 @@ task.spawn(function()
                 S.failStreak = 0
                 S.pending[coin] = nil
             elseif now - rec.t > 2.5 then
-                S.failStreak = S.failStreak + 1 -- подлетели, а монета не изменилась
+                S.failStreak = S.failStreak + 1 
                 S.pending[coin] = nil
             end
         end
@@ -1316,16 +1295,16 @@ task.spawn(function()
             end
 
             local target = S.serverMax or tonumber(getgenv().BagSize) or 40
-            local real = S.serverCount or S.bagCount() -- число из самой игры, если нашли
+            local real = S.serverCount or S.bagCount() 
             local guiState = S.bagFull()
             local full
             if real then
-                full = real >= target -- верим игре, а не своему счётчику
+                full = real >= target 
             else
                 full = guiState == true or (guiState == nil and S.collected >= target)
             end
             local have = real or S.collected
-            -- "застряли" только ближе к концу, иначе лаг даёт ложное срабатывание
+         
             local stuck = have >= target * 0.7 and S.failStreak >= 8
             local noCoins = emptySince ~= nil and have > 0 and now - emptySince > 4
 
@@ -1337,7 +1316,7 @@ S.finish(why)
             end
         end
  
-        -- умер во время фарма: добиваем убийцу из лобби
+    
         if S.phase == "farming" and not S.me() and getgenv().AutoEndRound and not S.deadRun then
             if S.role() ~= "murderer" and S.murderer() then
                 S.deadRun = true
@@ -1513,7 +1492,8 @@ SettingsTab:AddToggle({Name="Liquid Glass Theme",Default=false,Callback=function
 SettingsTab:AddLabel({Text="🚀 PERFORMANCE"})
 SettingsTab:AddButton({Name="FPS Unlocker: ON",Callback=function() pcall(function() setfpscap(9999) end) OrionLib:MakeNotification({Name="MAX Hub",Content="FPS Unlocked!",Time=2}) end})
 SettingsTab:AddButton({Name="FPS Unlocker: 60",Callback=function() pcall(function() setfpscap(60) end) OrionLib:MakeNotification({Name="MAX Hub",Content="FPS: 60",Time=2}) end})
--- ОНЛАЙН-СЧЁТЧИК (нужен /api/ping на сервере)
+
+-- ОНЛАЙН-СЧЁТЧИК
 do
     local label = SettingsTab:AddLabel({Text = "👥 Online: ..."})
     local sid = HttpService:GenerateGUID(false)
@@ -1552,7 +1532,7 @@ for _, gui in ipairs(coreGui:GetChildren()) do
 end
 
 if mainWindow then
-    -- Ищем Header (полоска сверху)
+    
     local header = mainWindow:FindFirstChild("Frame") or mainWindow:GetChildren()[2]
     for _, child in ipairs(mainWindow:GetChildren()) do
         if child:IsA("Frame") and child.Size.Y.Scale == 0 and child.Size.Y.Offset == 32 then
@@ -1613,7 +1593,7 @@ hubIcon.Size = UDim2.new(0, 50, 0, 50)
 hubIcon.Position = UDim2.new(0, 20, 0.5, -25)
 hubIcon.BackgroundColor3 = Color3.fromRGB(35, 35, 42)
 hubIcon.BorderSizePixel = 0
-hubIcon.Image = "rbxassetid://131110531238687"  -- моя картинка фона (можете поставить свою)
+hubIcon.Image = "rbxassetid://131110531238687"  -- моя картинка вы можете поставить любую другую
 hubIcon.ImageTransparency = 0.3
 hubIcon.AutoButtonColor = false
 hubIcon.Visible = true
@@ -1805,3 +1785,49 @@ SettingsTab:AddLabel({Text="📊 STATS"})
 SettingsTab:AddToggle({Name="Show Ping/FPS",Default=true,Callback=function(v)
     statsFrame.Visible = v
 end})
+-- ==============================================
+-- 💛 SUPPORT TAB
+-- ==============================================
+do
+    local PASSES = {
+        { robux = 5,   id = 2025963239 },
+        { robux = 10,  id = 2025579203 },
+        { robux = 20,  id = 2026641220 },
+        { robux = 50,  id = 2026215249 },
+        { robux = 100, id = 2026041237 },
+        { robux = 500, id = 2025279226 },
+    }
+
+    local title = SupportTab:AddLabel({Text = "💛 Support the author"})
+    title.TextColor3 = Color3.fromRGB(255, 215, 100)
+    title.TextSize = 14
+
+    local info = SupportTab:AddLabel({Text = "Thanks for using MAX Hub! Pick any amount to support development."})
+    info.TextWrapped = true
+    info.TextYAlignment = Enum.TextYAlignment.Top
+    info.Size = UDim2.new(1, -4, 0, 34)
+
+    local linkBox = SupportTab:AddTextbox({Name = "Selected link (copy manually if needed)", Placeholder = "press a button below"})
+
+    for _, p in ipairs(PASSES) do
+        SupportTab:AddButton({
+            Name = "💛 " .. p.robux .. " R$ - support",
+            Callback = function()
+                if not p.id or p.id == 0 then
+                    OrionLib:MakeNotification({Name = "MAX Hub", Content = "This pass is not set up yet", Time = 3})
+                    return
+                end
+                local url = "https://www.roblox.com/game-pass/" .. p.id
+                linkBox.Text = url
+                local copied = false
+                if setclipboard then copied = pcall(setclipboard, url) end
+                pcall(function() game:GetService("GuiService"):OpenBrowserWindow(url) end)
+                OrionLib:MakeNotification({
+                    Name = "MAX Hub",
+                    Content = copied and (p.robux .. " R$ link copied! Paste it in your browser.") or "Copy the link from the box above",
+                    Time = 3
+                })
+            end
+        })
+    end
+end
