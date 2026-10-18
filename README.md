@@ -8,15 +8,16 @@ Script hub for **Murder Mystery 2** with an auto farm, a values/trade calculator
 loadstring(game:HttpGet("https://raw.githubusercontent.com/sega1games12-alt/MAX-Hub/main/hub.lua"))()
 ```
 
-## Features
+Features
 
-- **Auto Farm** for coins, with Auto End Round / Reset
-- **Values & Trade** tabs: item values and a trade calculator
-- **Aim tools:** Aim Lock, Auto Shoot, Silent Aim, Kill Aura
-- **Visuals:** Player ESP, Role ESP, Gun Dropped ESP
-- **Movement:** Fly, NoClip, Speed, Jump
-- **Low Power mode** (Settings) for running several windows
-- UI themes, Glass mode, FPS unlocker buttons
+* Auto Farm for coins, with Auto End Round / Reset (full bag)
+* Combat: Kill Aura (Murderer), Auto Shot (Sheriff), Auto Grab Gun, Fling Murderer / Fling Sheriff
+* Values & Trade tabs: item values and a trade calculator
+* Visuals: Player ESP, Role ESP, Gun Dropped ESP, Fullbright, Angel Wings Aura
+* Movement: Fly, NoClip, Speed, Jump, Infinite Jumps, Anti-Fling
+* Utility: Teleport to Lobby / Map / Gun, Server Hop, Show Ping/FPS, FPS unlocker
+* Low Power mode (Settings) for running several windows
+* UI themes, Glass mode
 
 ## Notes
 
