@@ -1366,7 +1366,114 @@ MainTab:AddToggle({
         pcall(function() RunService:Set3dRenderingEnabled(not v) end)
     end
 })
-MainTab:AddButton({Name="Teleport to Lobby",Callback=teleportToLobby})
+getgenv().MAXTP = {}
+
+getgenv().MAXTP.notify = function(text)
+    pcall(function()
+        OrionLib:MakeNotification({Name="MAX Hub", Content=text, Time=2})
+    end)
+end
+
+getgenv().MAXTP.spawnsIn = function(root)
+    local list = {}
+    if not root then return list end
+    for _, o in ipairs(root:GetDescendants()) do
+        if o:IsA("BasePart") and (o:IsA("SpawnLocation") or string.find(string.lower(o.Name), "spawn")) then
+            table.insert(list, o)
+        end
+    end
+    return list
+end
+
+getgenv().MAXTP.above = function(part)
+    return CFrame.new(part.Position + Vector3.new(0, part.Size.Y / 2 + 4, 0))
+end
+
+getgenv().MAXTP.lobby = function()
+    local M = getgenv().MAXTP
+    local S = getgenv().MAXState
+    local c = LocalPlayer.Character
+    local h = c and c:FindFirstChild("HumanoidRootPart")
+    if not h then return end
+
+    local cont = S and S.container and S.container()
+    local map = cont and cont.Parent
+    if map == workspace then map = nil end
+
+    local real, named = {}, {}
+    for _, o in ipairs(workspace:GetDescendants()) do
+        if o:IsA("BasePart") then
+            local isSpawn = o:IsA("SpawnLocation")
+            local nm = string.find(string.lower(o.Name), "spawn") ~= nil
+            if isSpawn or nm then
+                local model = o:FindFirstAncestorOfClass("Model")
+                local isChar = model and model:FindFirstChildOfClass("Humanoid")
+                if not isChar and not (map and o:IsDescendantOf(map)) then
+                    if isSpawn then table.insert(real, o) else table.insert(named, o) end
+                end
+            end
+        end
+    end
+
+    if #real > 0 then
+        smoothTeleport(M.above(real[math.random(#real)]))
+    elseif getgenv().MAXLobbyCF then
+        smoothTeleport(getgenv().MAXLobbyCF)
+    elseif #named > 0 then
+        smoothTeleport(M.above(named[math.random(#named)]))
+    else
+        M.notify("Lobby spawn not found")
+    end
+end
+
+getgenv().MAXTP.map = function()
+    local M = getgenv().MAXTP
+    local S = getgenv().MAXState
+    local c = LocalPlayer.Character
+    local h = c and c:FindFirstChild("HumanoidRootPart")
+    if not h then return end
+    local cont = S and S.container and S.container()
+    local map = cont and cont.Parent
+    if not map or map == workspace then
+        M.notify("Map not found (round not started?)")
+        return
+    end
+    local list = M.spawnsIn(map)
+    if #list > 0 then
+        smoothTeleport(M.above(list[math.random(#list)]))
+        return
+    end
+    for _, o in ipairs(cont:GetChildren()) do
+        if o:IsA("BasePart") then
+            smoothTeleport(CFrame.new(o.Position + Vector3.new(0, 3, 0)))
+            return
+        end
+    end
+    local ok, cf, size = pcall(map.GetBoundingBox, map)
+    if ok and cf then
+        smoothTeleport(CFrame.new(cf.Position + Vector3.new(0, size.Y / 2 + 5, 0)))
+    end
+end
+
+-- запоминаем точку в лобби: пока карты нет и стоим на земле
+task.spawn(function()
+    while RUN.alive() and task.wait(3) do
+        pcall(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            local hum = c and c:FindFirstChildOfClass("Humanoid")
+            if not h or not hum or hum.Health <= 0 then return end
+            if hum.FloorMaterial == Enum.Material.Air then return end
+            for _, m in ipairs(workspace:GetChildren()) do
+                if m:FindFirstChild("CoinContainer") then return end
+            end
+            getgenv().MAXLobbyCF = h.CFrame
+        end)
+    end
+end)
+
+MainTab:AddButton({Name="Teleport to Lobby",Callback=function() getgenv().MAXTP.lobby() end})
+MainTab:AddButton({Name="Teleport to Map",Callback=function() getgenv().MAXTP.map() end})
 MainTab:AddToggle({Name="Auto Shot (Sheriff)",Default=false,Callback=function(v) getgenv().AutoShotEnabled=v end})
 MainTab:AddToggle({Name="Kill Aura (Murderer)",Default=false,Callback=function(v) getgenv().KillAuraEnabled=v end})
 MainTab:AddToggle({Name="Anti-Fling",Default=false,Callback=function(v) getgenv().AntiFlingEnabled=v if v then OrionLib:MakeNotification({Name="MAX Hub",Content="Anti-Fling ON!",Time=2}) else OrionLib:MakeNotification({Name="MAX Hub",Content="Anti-Fling OFF",Time=2}) end end})
