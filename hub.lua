@@ -24,7 +24,7 @@ getgenv().PlayerESPEnabled = false getgenv().RoleESPEnabled = false getgenv().Gu
 
 local Players = game:GetService("Players") local TweenService = game:GetService("TweenService") local UserInputService = game:GetService("UserInputService") local RunService = game:GetService("RunService") local HttpService = game:GetService("HttpService") local Lighting = game:GetService("Lighting") local LocalPlayer = Players.LocalPlayer local Camera = workspace.CurrentCamera
 local onlineItems = {} local isLoaded = false local grabDebounce = false
-local apiBase = "https://685dd885-32bd-4a4c-a712-8898791ea1cb-00-melrwd2vbenf.sisko.replit.dev/api"
+local apiBase = "https://mm2-hub-api.max-gub.workers.dev/api"
 local defaultWalkSpeed = 16 local defaultJumpPower = 50 getgenv().CurrentCustomSpeed = defaultWalkSpeed getgenv().CurrentCustomJump = defaultJumpPower getgenv().SpeedAndJumpLoop = true
 local origAmbient = Lighting.Ambient local origOutdoorAmbient = Lighting.OutdoorAmbient local origBrightness = Lighting.Brightness local origFogEnd = Lighting.FogEnd
 
